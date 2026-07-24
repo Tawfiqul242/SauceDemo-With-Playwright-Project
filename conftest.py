@@ -1,5 +1,7 @@
 import pytest
 from playwright.sync_api import sync_playwright
+from utils.read_json import load_json
+from pages.login_page import LoginPage
 
 @pytest.fixture(scope="session")  # browser fixture for opennign browser
 def browser():
@@ -17,4 +19,14 @@ def page(browser):
     yield page
 
     page.close()
+
+@pytest.fixture
+def logged_in(page):
+    login = LoginPage(page)
+
+    data = load_json()["valid_user"]
+
+    login.navigate()
+    login.fill_login_form(data["username"], data["password"])
+    login.click_login_btn()
 
