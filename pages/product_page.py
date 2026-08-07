@@ -15,6 +15,8 @@ class ProductPage:
         self.ITEM_PRICE = page.locator(".inventory_item_price")
         self.ADD_TO_CART_BTN = page.get_by_role("button", name="Add to cart")
         self.SORT_DROPDOWN = page.locator("[data-test='product-sort-container']")
+        self.CART_BADGE = page.locator(".shopping_cart_badge")
+        self.CART_LINK = page.locator("a.shopping_cart_link")
 
     def click_menu(self):
         self.MENU.click()
@@ -57,3 +59,13 @@ class ProductPage:
 
     def sort_by_price_high_to_low(self):
         self.SORT_DROPDOWN.select_option("hilo")
+
+    def click_add_to_cart_btn_by_product_name(self, product_name):
+        self.PRODUCTS.filter(
+            has= self.page.locator(".inventory_item_name" , has_text=product_name)
+        ).get_by_role("button", name="Add to cart").click()
+
+    def remove_btn_by_product_name(self, product_name):
+        return self.PRODUCTS.filter(
+            has= self.page.locator(".inventory_item_name" , has_text=product_name)
+        ).get_by_role("button", name="Remove")
