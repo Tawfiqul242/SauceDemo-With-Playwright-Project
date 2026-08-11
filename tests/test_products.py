@@ -49,3 +49,18 @@ def test_product_details(page, logged_in):
 
     # Verify Add to Cart button visible.
     expect(product_details.ADD_TO_CART_BTN).to_be_visible()
+
+
+#TC-010: Verify adding multiple products
+def test_add_multiple_products_in_cart(page, logged_in):
+
+    #page class objects
+    product_page = ProductPage(page)
+
+    #Add three different products.
+    product_page.click_add_to_cart_btn_by_product_name("Sauce Labs Backpack")
+    product_page.click_add_to_cart_btn_by_product_name("Sauce Labs Bike Light")
+    product_page.click_add_to_cart_btn_by_product_name("Sauce Labs Bolt T-Shirt")
+
+    # Verify Cart badge shows 3.
+    expect(product_page.CART_BADGE).to_have_text("3")
