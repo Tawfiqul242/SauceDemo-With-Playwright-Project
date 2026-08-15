@@ -60,10 +60,13 @@ class ProductPage:
     def sort_by_price_high_to_low(self):
         self.SORT_DROPDOWN.select_option("hilo")
 
+    def get_add_to_add_btn_by_product_name(self, product_name):
+        return self.PRODUCTS.filter(
+            has = self.page.locator(".inventory_item_name" , has_text=product_name)
+        ).get_by_role("button", name="Add to cart")
+
     def click_add_to_cart_btn_by_product_name(self, product_name):
-        self.PRODUCTS.filter(
-            has= self.page.locator(".inventory_item_name" , has_text=product_name)
-        ).get_by_role("button", name="Add to cart").click()
+        self.get_add_to_add_btn_by_product_name(product_name).click()
 
     def remove_btn_by_product_name(self, product_name):
         return self.PRODUCTS.filter(
