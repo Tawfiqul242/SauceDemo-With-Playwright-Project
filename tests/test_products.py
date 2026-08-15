@@ -64,3 +64,21 @@ def test_add_multiple_products_in_cart(page, logged_in):
 
     # Verify Cart badge shows 3.
     expect(product_page.CART_BADGE).to_have_text("3")
+
+
+# TC-011: Verify removing product from inventory page
+def test_removing_product_from_inventory_page(page, logged_in):
+
+    product_page = ProductPage(page)
+
+    # Add product.
+    product_page.click_add_to_cart_btn_by_product_name("Sauce Labs Backpack")
+
+    # Click Remove.
+    product_page.remove_btn_by_product_name("Sauce Labs Backpack").click()
+
+    # Verify Cart badge updated.
+    expect(product_page.CART_BADGE).not_to_be_visible()
+
+    # Verify Button changes back to Add to Cart.
+    expect(product_page.get_add_to_add_btn_by_product_name("Sauce Labs Backpack")).to_be_visible()
