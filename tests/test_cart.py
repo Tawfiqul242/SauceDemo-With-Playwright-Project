@@ -70,3 +70,20 @@ def test_verify_romoving_product_from_cart_page(page, logged_in):
 
     # Verify Cart becomes empty.
     expect(cart_page.CART_ITEM).to_have_count(0)
+
+
+
+# TC-014: Verify Continue Shopping button
+def test_verify_continue_shopping_button(page, logged_in):
+
+    product_page = ProductPage(page)
+    cart_page = CartPage(page)
+
+    # Open cart
+    product_page.CART_LINK.click()
+
+    # Click Continue Shopping.
+    cart_page.CONTINUE_BTN.click()
+
+    # User returns to Products page.
+    expect(product_page.PRODUCTS_TITLE).to_be_visible()
