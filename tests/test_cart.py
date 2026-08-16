@@ -47,3 +47,26 @@ def test_cart_page_displays_selected_products(page, logged_in):
     # Quantity = 1
     expect(cart_page.get_cart_product_qty_by_name("Sauce Labs Bolt T-Shirt")).to_have_text("1")
     expect(cart_page.get_cart_product_qty_by_name("Sauce Labs Fleece Jacket")).to_have_text("1")
+
+
+
+# TC-013: Verify removing product from cart page
+def test_verify_romoving_product_from_cart_page(page, logged_in):
+
+    product_page = ProductPage(page)
+    cart_page = CartPage(page)
+
+    # Add product
+    product_page.click_add_to_cart_btn_by_product_name("Sauce Labs Bike Light")
+
+    # Go to cart
+    product_page.CART_LINK.click()
+
+    # Remove product
+    cart_page.click_remove_btn_by_product_name("Sauce Labs Bike Light")
+
+    # Verify Product removed
+    expect(cart_page.get_cart_product_by_name("Sauce Labs Bike Light")).not_to_be_visible()
+
+    # Verify Cart becomes empty.
+    expect(cart_page.CART_ITEM).to_have_count(0)
