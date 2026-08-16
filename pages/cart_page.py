@@ -8,6 +8,7 @@ class CartPage:
         self.ITEM_QTY = page.locator(".cart_quantity")
         self.ITEM_NAME = page.locator(".inventory_item_name")
         self.ITEM_PRICE = page.locator(".inventory_item_price")
+        self.CONTINUE_BTN = page.get_by_role("button", name="Continue Shopping")
 
     def get_cart_product_by_name(self, product_name):
         return self.ITEM_NAME.filter(
