@@ -23,3 +23,8 @@ class CartPage:
         return self.CART_ITEM.filter(
             has_text= product_name
         ).locator(".cart_quantity")
+
+    def click_remove_btn_by_product_name(self, product_name):
+        self.CART_ITEM.filter(
+            has_text= product_name
+        ).get_by_role("button", name="Remove").click()
