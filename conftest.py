@@ -24,7 +24,7 @@ def page(browser):
 def logged_in(page):
     login = LoginPage(page)
 
-    data = load_json()["valid_user"]
+    data = load_json("test_data/login_data.json")["valid_user"]
 
     login.navigate()
     login.fill_login_form(data["username"], data["password"])
